@@ -14,7 +14,7 @@ server.route({
     handler: (request, reply) => {
 
         var options = {
-            url: 'http://localhost:3001/latlongByAddress/' + encodeURIComponent(request.params.address),
+            url: 'http://api-geo/latlongByAddress/' + encodeURIComponent(request.params.address),
             method: 'GET',
         };
 
@@ -42,7 +42,7 @@ server.route({
 
 
         var options = {
-            url: 'http://localhost:3002/weatherByLatLongAndDate/' +
+            url: 'http://api-weather/weatherByLatLongAndDate/' +
             encodeURIComponent(request.params.lat) + '/' +
             encodeURIComponent(request.params.long) + '/' +
             encodeURIComponent(request.params.startDate),
