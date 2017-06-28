@@ -32,7 +32,7 @@ spec:
         imagePullPolicy: IfNotPresent
         name: api-proxy
         ports:
-        - containerPort: 80
+        - containerPort: 3003
       dnsPolicy: ClusterFirst
       imagePullSecrets:
       - name: quayregistrykey
