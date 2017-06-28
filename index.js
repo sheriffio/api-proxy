@@ -6,7 +6,7 @@ const Request = require('request-promise');
 const Boom = require('boom');
 
 const server = new Hapi.Server();
-server.connection({ port: 3000, host: 'localhost' });
+server.connection({ port: 3003, host: 'localhost' });
 
 server.route({
     method: 'GET',
@@ -16,18 +16,21 @@ server.route({
         var options = {
             url: 'http://localhost:3001/latlongByAddress/' + encodeURIComponent(request.params.address),
             method: 'GET',
-
         };
 
         Request(options)
         .then((response) => {
 
-            reply(response).header('content-type', 'application/json');
+            reply(response)
+            .header('content-type', 'application/json')
+            .header('Access-Control-Allow-Origin', '*');
         })
         .catch((err) => {
 
             console.warn('ERROR:', err);
-            reply(Boom.wrap(err, 500));
+            reply(Boom.wrap(err, 500))
+            .header('content-type', 'application/json')
+            .header('Access-Control-Allow-Origin', '*');
         });
     }
 });
@@ -50,12 +53,16 @@ server.route({
         Request(options)
         .then((response) => {
 
-            reply(response).header('content-type', 'application/json');
+            reply(response)
+            .header('content-type', 'application/json')
+            .header('Access-Control-Allow-Origin', '*');
         })
         .catch((err) => {
 
             console.warn('ERROR:', err);
-            reply(Boom.wrap(err, 500));
+            reply(Boom.wrap(err, 500))
+            .header('content-type', 'application/json')
+            .header('Access-Control-Allow-Origin', '*');
         });
     }
 });

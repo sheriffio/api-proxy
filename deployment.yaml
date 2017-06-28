@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: api-proxy
+    name: api-proxy
+    type: web
+  name: api-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-proxy
+      name: api-proxy
+      type: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: api-proxy
+        name: api-proxy
+        type: web
+      name: api-proxy
+    spec:
+      containers:
+      - image: sheriff/api-proxy:1.0.{{build.number}}
+        imagePullPolicy: IfNotPresent
+        name: api-proxy
+        ports:
+        - containerPort: 80
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: quayregistrykey
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
