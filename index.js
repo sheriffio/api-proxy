@@ -6,7 +6,7 @@ const Request = require('request-promise');
 const Boom = require('boom');
 
 const server = new Hapi.Server();
-server.connection({ port: 3003, host: 'localhost' });
+server.connection({ port: 3003, host: '0.0.0.0' });
 
 server.route({
     method: 'GET',
